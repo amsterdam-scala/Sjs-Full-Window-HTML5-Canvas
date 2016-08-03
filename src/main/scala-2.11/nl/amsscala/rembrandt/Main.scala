@@ -1,7 +1,9 @@
 package nl.amsscala.rembrandt
 
 import org.scalajs.dom
+import org.threeten.bp
 
+import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExport
 
 /**
@@ -18,7 +20,14 @@ object Main {
     */
   @JSExport
   def main(canvas: dom.html.Canvas): Unit = {
-    println("Main started.")
+
+    val timezone = js.Dynamic.global.jstz.determine()
+    println(timezone.name())
+
+    val (date, formatter) = (bp.LocalDateTime.now(bp.ZoneId.of("+02:00"))
+      , bp.format.DateTimeFormatter.ofPattern("d-MMM-yyyy HH:mm:ss", java.util.Locale.US))
+    println(s"Main started at ${formatter.format(date)}.")
+
     setup(canvas, paint)
     // ... rest of the application logic
   }
@@ -31,7 +40,7 @@ object Main {
     */
   def paint(area: dom.ClientRect, renderer: dom.CanvasRenderingContext2D): Unit = {
     // Example code
-    renderer.fillRect(0+50, 0+50, area.width-100, area.height-100)
+    renderer.fillRect(0 + 50, 0 + 50, area.width - 100, area.height - 100)
   }
 
   /**

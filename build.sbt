@@ -19,11 +19,13 @@ normalizedName := "main"
 resolvers += Resolver.sonatypeRepo("snapshots")
 libraryDependencies ++= Seq(
   "be.doeraene" %%% "scalajs-jquery" % "0.9.0",
+  "com.github.cquiroz" %%% "scala-java-locales" % "0.3.0+29",
   "com.github.karasiq" %%% "scalajs-bootstrap" % "1.1.1",
   "com.lihaoyi" %%% "scalatags" % "0.6.0",
   "com.lihaoyi" %%% "upickle" % "0.4.1",
   "com.lihaoyi" %%% "utest" % "0.4.3" % "test",
- // "io.surfkit" % "scalajs-google-maps_sjs0.6_2.11" % "0.1-SNAPSHOT",
+  "io.github.soc" %%% "scala-java-time" % "2.0.0-M2",
+  "io.surfkit" %%% "scalajs-google-maps" % "0.1-SNAPSHOT",
   "org.scala-js" %%% "scalajs-dom" % "0.9.1")
 
 //scalaJSStage in Global := FastOptStage
@@ -41,7 +43,8 @@ jsDependencies += "org.webjars" % "jquery" % "3.1.0" / "3.1.0/jquery.js"
 
 lazy val root = (project in file(".")).enablePlugins(ScalaJSPlugin)
 
-mainClass in Compile := Some("Main")
+// Set the main class for packaging the main in jar, so irrelevant for Scala.js
+// mainClass in Compile := Some("nl.amsscala.rembrandt.Main")
 workbenchSettings
 refreshBrowsers <<= refreshBrowsers.triggeredBy(fastOptJS in Compile)
 
