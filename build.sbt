@@ -35,12 +35,13 @@ jsDependencies += RuntimeDOM
 
 // If true, a launcher script src="../[normalizedName]-launcher.js will
 // be generated that always calls the main def indicated by the JSApp.
-// persistLauncher in Compile := true
+persistLauncher in Compile := true
 persistLauncher in Test := false
 
 // Will create [normalizedName]-jsdeps.js containing all JavaScript libraries
-jsDependencies += "org.webjars" % "jquery" % "3.1.0" / "3.1.0/jquery.js"
-// jsDependencies += "org.webjars" % "bootstrap" % "3.3.6" / "bootstrap.js" minified "bootstrap.min.js" dependsOn "2.2.4/jquery.js"
+jsDependencies ++= Seq(
+  "org.webjars" % "jquery" % "3.1.0" / "3.1.0/jquery.js",
+  "org.webjars" % "jstimezonedetect" % "1.0.6" / "1.0.6/jstz.js")
 
 lazy val root = (project in file(".")).enablePlugins(ScalaJSPlugin)
 

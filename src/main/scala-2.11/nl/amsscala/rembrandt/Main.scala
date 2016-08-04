@@ -11,12 +11,14 @@ import scala.scalajs.js.annotation.JSExport
   * class% with the application's main class name (whatever packaged name you give to the copy of this file).
   */
 @JSExport
-object Main {
+object Main extends js.JSApp {
   val timezone = js.Dynamic.global.jstz.determine()
 
   /**
-    * The method initially called when the page is loaded. This first calls the setup method,
-    * then performs the rest of the application logic (which needs to be implemented).
+    * The method initially called when the HTML page is loaded typically by its `Main().main(...)`
+    * scripting. E.g. `...rembrandt.Main().main(document.getElementById('canvas'))`
+    * This first calls the setup method, then performs the rest of the application logic
+    * (which needs to be implemented).
     *
     * @param canvas The HTML element, the container for graphics
     */
@@ -29,6 +31,15 @@ object Main {
 
     setup(canvas, paint)
     // ... rest of the application logic
+  }
+
+  /**
+    * Alternative method is enforced by JSApp which is necessary for the parameterless main call of the sbt
+    * generated launcher when generation is set in build.sbt as: `persistLauncher in Compile := true`
+    */
+  @JSExport
+  def main(): Unit = {
+    main(dom.document.getElementById("canvas").asInstanceOf[dom.html.Canvas])
   }
 
   /**
