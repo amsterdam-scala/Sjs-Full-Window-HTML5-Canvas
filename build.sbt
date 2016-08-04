@@ -26,7 +26,8 @@ libraryDependencies ++= Seq(
   "com.lihaoyi" %%% "utest" % "0.4.3" % "test",
   "io.github.soc" %%% "scala-java-time" % "2.0.0-M2",
   "io.surfkit" %%% "scalajs-google-maps" % "0.1-SNAPSHOT",
-  "org.scala-js" %%% "scalajs-dom" % "0.9.1")
+  "org.scala-js" %%% "scalajs-dom" % "0.9.1",
+  "org.scalatest" %% "scalatest" % "3.0.0" % "test")
 
 //scalaJSStage in Global := FastOptStage
 scalaJSUseRhino in Global := false

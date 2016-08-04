@@ -12,6 +12,8 @@ import scala.scalajs.js.annotation.JSExport
   */
 @JSExport
 object Main {
+  val timezone = js.Dynamic.global.jstz.determine()
+
   /**
     * The method initially called when the page is loaded. This first calls the setup method,
     * then performs the rest of the application logic (which needs to be implemented).
@@ -20,9 +22,6 @@ object Main {
     */
   @JSExport
   def main(canvas: dom.html.Canvas): Unit = {
-
-    val timezone = js.Dynamic.global.jstz.determine()
-    println(timezone.name())
 
     val (date, formatter) = (bp.LocalDateTime.now(bp.ZoneId.of("+02:00"))
       , bp.format.DateTimeFormatter.ofPattern("d-MMM-yyyy HH:mm:ss", java.util.Locale.US))
@@ -40,7 +39,35 @@ object Main {
     */
   def paint(area: dom.ClientRect, renderer: dom.CanvasRenderingContext2D): Unit = {
     // Example code
+    val gradient = renderer.createLinearGradient(area.width / 2 - 200, 0, area.width / 2 + 200, 0)
+    gradient.addColorStop(0, "red")
+    gradient.addColorStop(0.5, "green")
+    gradient.addColorStop(1, "blue")
+    renderer.fillStyle = gradient
+
     renderer.fillRect(0 + 50, 0 + 50, area.width - 100, area.height - 100)
+
+    renderer.clearRect(0 + 75, 0 + 75, area.width - 150, area.height - 150)
+
+    renderer.textAlign = "center"
+    renderer.textBaseline = "bottom"
+
+    val dateTime = new js.Date()
+    renderer.font = "75px sans-serif"
+    renderer.fillText(
+      Seq(dateTime.getHours(), dateTime.getMinutes(), dateTime.getSeconds()).map(num => f"$num%02d").mkString(":"),
+      area.width / 2,
+      area.height / 2
+    )
+
+    renderer.textBaseline = "top"
+    renderer.font = "48px sans-serif"
+
+    renderer.fillText(
+      timezone.name().toString,
+      area.width / 2,
+      area.height / 2
+    )
   }
 
   /**
@@ -63,4 +90,5 @@ object Main {
     // Handle the event of resizing.
     dom.window.onresize = (event: dom.Event) => present()
   }
+
 }
