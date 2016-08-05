@@ -40,7 +40,7 @@ persistLauncher in Test := false
 
 // Will create [normalizedName]-jsdeps.js containing all JavaScript libraries
 jsDependencies ++= Seq(
-  "org.webjars" % "jquery" % "3.1.0" / "3.1.0/jquery.js",
+  // "org.webjars" % "jquery" % "3.1.0" / "3.1.0/jquery.js",
   "org.webjars" % "jstimezonedetect" % "1.0.6" / "1.0.6/jstz.js")
 
 lazy val root = (project in file(".")).enablePlugins(ScalaJSPlugin)
