@@ -31,10 +31,8 @@ object Main extends js.JSApp with Resizeable with Fancy with Clock {
     */
   @JSExport
   def main(canvas: dom.html.Canvas): Unit = {
-    val (date, formatter) = (bp.LocalDateTime.now(bp.ZoneId.of("+02:00"))
-      , bp.format.DateTimeFormatter.ofPattern("d-MMM-yyyy HH:mm:ss", java.util.Locale.US))
 
-    println(s"Main started at ${formatter.format(date)}.")
+    println(s"Main started at ${dateTimeStringOfPattern("d-MMM-yyyy HH:mm:ss")}.")
 
     // Initialize the canvas and refresh continuously.
     dom.window.setInterval(() => intialResize(canvas, List(resizeCanvas, fancy, clock), timezone), 40)

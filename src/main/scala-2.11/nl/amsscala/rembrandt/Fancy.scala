@@ -1,11 +1,12 @@
-package nl.amsscala.rembrandt
+package nl.amsscala
+package rembrandt
 
 import org.scalajs.dom
 
 trait Fancy {
   // Example code
 
-  protected def fancy(canvas: dom.html.Canvas, renderer: dom.CanvasRenderingContext2D, dummy: String) = {
+  protected def fancy(canvas: dom.html.Canvas, renderer: dom.CanvasRenderingContext2D, dummy: => String) = {
     val area =canvas.getBoundingClientRect()
     val gradient = renderer.createLinearGradient(area.width / 2 - 200, 0, area.width / 2 + 200, 0)
     gradient.addColorStop(0, "red")

@@ -1,4 +1,5 @@
-package nl.amsscala.rembrandt
+package nl.amsscala
+package rembrandt
 
 import org.scalajs.dom
 import org.threeten.bp
@@ -8,9 +9,4 @@ import scala.scalajs.js.annotation.JSExport
 
 
 
-trait Bubbles {
-  def resize(): Unit = {}
-
-    dom.window.setInterval(() => resize(), 50)
-
-}
+trait Bubbles { }
