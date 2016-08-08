@@ -1,7 +1,6 @@
 package nl.amsscala.rembrandt
 
 import org.scalajs.dom
-import org.threeten.bp
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExport
@@ -11,7 +10,7 @@ import scala.scalajs.js.annotation.JSExport
   * class% with the application's main class name (whatever packaged name you give to the copy of this file).
   */
 @JSExport
-object Main extends js.JSApp with Resizeable with Fancy with Clock {
+object Main extends js.JSApp with Resizeable with Fancy with Clock with Bubbles{
   lazy val timezone = js.Dynamic.global.jstz.determine().name().toString
 
   /**
@@ -34,8 +33,9 @@ object Main extends js.JSApp with Resizeable with Fancy with Clock {
 
     println(s"Main started at ${dateTimeStringOfPattern("d-MMM-yyyy HH:mm:ss")}.")
 
+    intialResize(canvas, List(successiveResize, fancy, clock, bubbles), timezone)
     // Initialize the canvas and refresh continuously.
-    dom.window.setInterval(() => intialResize(canvas, List(resizeCanvas, fancy, clock), timezone), 40)
+    dom.window.setInterval(() => intialResize(canvas, List(successiveResize, fancy, clock, bubbles), timezone), 40)
 
     // ... rest of the application logic
   }

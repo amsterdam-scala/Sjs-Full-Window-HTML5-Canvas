@@ -28,7 +28,7 @@ trait Clock extends Fancy {
     renderer.textAlign = "center"
     renderer.textBaseline = "bottom"
     renderer.font = "75px sans-serif"
-    renderer.fillText(dateTimeStringOfPattern("HH:mm:ssVV"), area.width / 2, area.height / 2)
+    renderer.fillText(dateTimeStringOfPattern("HH:mm:ss"), area.width / 2, area.height / 2)
 
     renderer.textBaseline = "top"
     renderer.font = "48px sans-serif"
