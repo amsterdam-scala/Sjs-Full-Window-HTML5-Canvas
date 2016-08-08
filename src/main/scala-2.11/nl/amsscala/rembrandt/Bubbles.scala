@@ -28,7 +28,7 @@ trait Bubbles{
     renderer.strokeStyle = "magenta"
     renderer.lineWidth = 5
 
-    waves = waves.map(w => draw(w)).takeWhile { w => w.time * 8 * speed < canvas.width || w.time * 5 * speed < canvas.height }
+    waves = waves.map(draw).takeWhile { w => w.time * 8 * speed < canvas.width || w.time * 5 * speed < canvas.height }
 
     canvas.onmousedown = { (e: dom.MouseEvent) => waves +:= Wave(new Point(e.clientX, e.clientY)) }
   }
