@@ -30,7 +30,8 @@ trait Bubbles{
 
     waves = waves.map(draw).takeWhile { w => w.time * 8 * speed < canvas.width || w.time * 5 * speed < canvas.height }
 
-    canvas.onmousedown = { (e: dom.MouseEvent) => waves +:= Wave(new Point(e.clientX, e.clientY)) }
+    lazy val runOnce = canvas.onmousedown = { (e: dom.MouseEvent) => waves +:= Wave(new Point(e.clientX, e.clientY)) }
+    runOnce
   }
 
 }

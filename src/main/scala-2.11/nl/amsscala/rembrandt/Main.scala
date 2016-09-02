@@ -1,4 +1,5 @@
-package nl.amsscala.rembrandt
+package nl.amsscala
+package rembrandt
 
 import org.scalajs.dom
 
@@ -9,16 +10,14 @@ import scala.scalajs.js.annotation.JSExport
   * Use this code as a template for resizeable full-window canvas applications. In index.html, replace %main application
   * class% with the application's main class name (whatever packaged name you give to the copy of this file).
   */
-@JSExport
-object Main extends js.JSApp with Resizeable with Fancy with Clock with Bubbles{
+object Main extends js.JSApp with Resizeable/* with Fancy*/ with Clock with Bubbles{
   lazy val timezone = js.Dynamic.global.jstz.determine().name().toString
 
   /**
     * Alternative method is enforced by JSApp which is necessary for the parameterless main call of the sbt
     * generated launcher when generation is set in build.sbt as: `persistLauncher in Compile := true`
     */
-  @JSExport
-  def main(): Unit = main(dom.document.getElementById("canvas").asInstanceOf[dom.html.Canvas])
+  def main(): Unit = main(dom.document.getElementById("canvas main").asInstanceOf[dom.html.Canvas])
 
   /**
     * The method initially called when the HTML page is loaded typically by its `Main().main(...)`
@@ -28,14 +27,14 @@ object Main extends js.JSApp with Resizeable with Fancy with Clock with Bubbles{
     *
     * @param canvas The HTML element, the container for graphics
     */
-  @JSExport
   def main(canvas: dom.html.Canvas): Unit = {
 
-    println(s"Main started at ${dateTimeStringOfPattern("d-MMM-yyyy HH:mm:ss")}.")
+    def run() = intialResize(canvas, List(successiveResize, fancy, clock, bubbles), timezone)
 
-    intialResize(canvas, List(successiveResize, fancy, clock, bubbles), timezone)
+    println(s"Main started at ${dateTimeStringOfPattern("d-MMM-yyyy HH:mm:ss")}.")
+    run()
     // Initialize the canvas and refresh continuously.
-    dom.window.setInterval(() => intialResize(canvas, List(successiveResize, fancy, clock, bubbles), timezone), 40)
+    dom.window.setInterval(() => run(), 40)
 
     // ... rest of the application logic
   }

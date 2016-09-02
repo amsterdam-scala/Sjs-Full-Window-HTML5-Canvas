@@ -1,40 +1,45 @@
-name := "FullWindowHtml5Canvas"
-version := "0.0"
-organization := "nl.amsscala"
-organizationName := "Amsterdam.scala Meetup Group"
+                name := "FullWindowHtml5Canvas"
+             version := "0.0"
+         description := "Simple HTML5 Canvas game ported to Scala.js."
+        organization := "nl.amsscala"
+    organizationName := "Amsterdam.scala Meetup Group"
 organizationHomepage := Some(url("http://www.meetup.com/amsterdam-scala/"))
-homepage := Some(url("http://github.com/amsterdam-scala/Sjs-Full-Window-HTML5-Canvas"))
+            homepage := Some(url("http://github.com/amsterdam-scala/Sjs-Full-Window-HTML5-Canvas"))
+           startYear := Some(2016)
+            licenses += "EUPL v.1.1" -> url("http://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11")
 
-startYear := Some(2016)
+// KEEP THIS normalizedName CONSTANTLY THE SAME, otherwise the outputted JS filename will be changed.
+      normalizedName := "main"
 
-description := "Scala.js application using HTML5 canvas to fill the window, repainted on window resize."
-
-licenses += "EUPL v.1.1" -> url("http://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11")
-
-scalaVersion := "2.11.8"
-
-// Keep this normalizedName constantly the same, otherwise the outputted JS filename will be changed.
-normalizedName := "main"
+// ** Scala dependencies **
+scalaVersion in ThisBuild := "2.11.8"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 libraryDependencies ++= Seq(
-  "be.doeraene" %%% "scalajs-jquery" % "0.9.0",
+         "be.doeraene" %%% "scalajs-jquery"     % "0.9.0",
   "com.github.cquiroz" %%% "scala-java-locales" % "0.3.0+29",
-  "com.github.karasiq" %%% "scalajs-bootstrap" % "1.1.1",
-  "com.lihaoyi" %%% "scalatags" % "0.6.0",
-  "com.lihaoyi" %%% "upickle" % "0.4.1",
-  "com.lihaoyi" %%% "utest" % "0.4.3" % "test",
-  "io.github.soc" %%% "scala-java-time" % "2.0.0-M2",
-  "io.surfkit" %%% "scalajs-google-maps" % "0.1-SNAPSHOT",
-  "org.scala-js" %%% "scalajs-dom" % "0.9.1",
-  "org.scalatest" %% "scalatest" % "3.0.0" % "test")
+  "com.github.karasiq" %%% "scalajs-bootstrap"  % "1.1.1",
+         "com.lihaoyi" %%% "scalatags"          % "0.6.0",
+         "com.lihaoyi" %%% "upickle"            % "0.4.1",
+       "io.github.soc" %%% "scala-java-time"    % "2.0.0-M2",
+          "io.surfkit" %%% "scalajs-google-maps"% "0.1-SNAPSHOT",
+        "org.scala-js" %%% "scalajs-dom"        % "0.9.1",
+        "org.scalatest" %% "scalatest"          % "3.0.0" % "test")
 
-//scalaJSStage in Global := FastOptStage
-scalaJSUseRhino in Global := false
+scalacOptions in (Compile,doc) ++= Seq("-doc-root-content", baseDirectory.value+"/src/main/scala-2.11/root-doc.md",
+  "-groups", "-implicits")
+
+// ** Scala.js configuration **
+// lazy val root = (project in file(".")).
+enablePlugins(ScalaJSPlugin)
+
+// Necessary for testing
 jsDependencies += RuntimeDOM
+scalaJSUseRhino in Global := false
+jsEnv := PhantomJSEnv(autoExit = false).value
 
-// If true, a launcher script src="../[normalizedName]-launcher.js will
-// be generated that always calls the main def indicated by the JSApp.
+// If true, a launcher script src="../[normalizedName]-launcher.js will be generated
+// that always calls the main def indicated by the used JSApp trait.
 persistLauncher in Compile := true
 persistLauncher in Test := false
 
@@ -42,13 +47,24 @@ persistLauncher in Test := false
 jsDependencies ++= Seq(
   // "org.webjars" % "jquery" % "3.1.0" / "3.1.0/jquery.js",
   "org.webjars" % "jstimezonedetect" % "1.0.6" / "1.0.6/jstz.js")
+skip in packageJSDependencies := false // All JavaScript dependencies to be concatenated to a single file
 
-lazy val root = (project in file(".")).enablePlugins(ScalaJSPlugin)
+// ScalaTest settings //
+// testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oF")
 
-// Set the main class for packaging the main in jar, so irrelevant for Scala.js
-// mainClass in Compile := Some("nl.amsscala.rembrandt.Main")
-workbenchSettings
-refreshBrowsers <<= refreshBrowsers.triggeredBy(fastOptJS in Compile)
+// Workbench settings **
+if (sys.env.isDefinedAt("CI")) {
+  println("Workbench disabled ", sys.env.getOrElse("CI", "?"))
+  Seq.empty
+} else {
+  println("Workbench enabled")
+  workbenchSettings
+}
 
-// Workbench has to know how to restart your application.
-bootSnippet := "Main().main(document.getElementById('canvas'));"
+if (sys.env.isDefinedAt("CI")) normalizedName := normalizedName.value // Dummy
+else // Update without refreshing the page every time fastOptJS completes
+  updateBrowsers <<= updateBrowsers.triggeredBy(fastOptJS in Compile)
+
+if (sys.env.isDefinedAt("CI")) normalizedName := normalizedName.value
+else // Workbench has to know how to restart your application.
+  bootSnippet := "Main().main(document.getElementById('canvas'));"

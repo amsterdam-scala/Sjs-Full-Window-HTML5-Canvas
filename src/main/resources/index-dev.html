@@ -11,23 +11,15 @@
     <meta name=generator content="Scala.js Scalatags">
     <meta name=versionId content="2016-08">
 
-    <title>Scala.js | Scaffold</title>
+    <title>Scala.js | Bubbles!</title>
     <link rel=apple-touch-icon href="img/apple-touch-icon.png">
-    <!-- Place favicon.ico in the root directory -->
-    <link rel=icon href="img/favicon.ico" type="image/x-icon">
-
-    <!-- Latest compiled and minified Bootstrap CSS, normalize.css is already included-->
-    <!--<link rel="stylesheet" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <!-- Place favicon.ico in the img directory -->
+    <link rel=icon type="image/x-icon" href="img/favicon.ico">
 
     <!-- Custom styles for this page -->
     <link rel=stylesheet media="screen" href="css/main.css">
 
-    <!-- Include JavaScript dependencies e.g. jquery.js -->
-    <script type="text/javascript" src="../main-jsdeps.js"></script>
-    <!-- Include Scala.js compiled code -->
-    <script type="text/javascript" src="../main-fastopt.js"></script>
-
+    <!--Workbench for development only -->
     <script type="text/javascript" src="/workbench.js"></script>
 
     <!--<style type="text/css"></style>-->
@@ -41,10 +33,15 @@
 
 <!-- Add your site or application content here -->
 <div>
-    <canvas id="canvas">Your browser doesn't support the HTML5 CANVAS tag.</canvas>
+    <canvas id="canvas main">Your browser doesn't support the HTML5 CANVAS tag.</canvas>
 </div>
 
-<!-- Run application. -->
+<!-- Include JavaScript dependencies -->
+<script type="text/javascript" src="../main-jsdeps.js"></script>
+<!-- Include Scala.js compiled code -->
+<script type="text/javascript" src="../main-fastopt.js"></script>
+<!-- Run JSApp -->
+<!-- <script type="text/javascript" src="../main-launcher.js"></script> -->
 <script type="text/javascript"> nl.amsscala.rembrandt.Main().main(document.getElementById('canvas'));</script>
 </body>
 </html>
