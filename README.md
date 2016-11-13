@@ -1,3 +1,7 @@
+<a href="http://www.w3.org/html/logo/">
+<img src="https://www.w3.org/html/logo/badge/html5-badge-h-css3-graphics-semantics.png" width="99" height="32" alt="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, and Semantics" title="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, and Semantics"></a>[![Scala.js](https://img.shields.io/badge/scala.js-0.6.10%2B-blue.svg?style=flat)](https://www.scala-js.org)
+[![Build Status](https://travis-ci.org/amsterdam-scala/Sjs-Full-Window-HTML5-Canvas.svg?branch=master)](https://travis-ci.org/amsterdam-scala/Sjs-Full-Window-HTML5-Canvas)
+
 Scala Full Window HTML Canvas
 =============================
 To create a resizeable full window HTML Canvas Scala.js application
@@ -9,10 +13,6 @@ To create a resizeable full window HTML Canvas Scala.js application
 
 master
 
+Incorporated Technology
 
-
-
- Incorporated Technology
-
- Lincences: EUPL V.1.1
-
+Licence: EUPL V.1.1
