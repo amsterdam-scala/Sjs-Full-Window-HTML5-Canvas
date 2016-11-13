@@ -59,5 +59,13 @@ skip in packageJSDependencies := false // All JavaScript dependencies to be conc
 // testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oF")
 
 // Li Haoyi's Workbench settings **
-enablePlugins(WorkbenchPlugin)
-refreshBrowsers <<= refreshBrowsers.triggeredBy(fastOptJS in Compile)
+if (sys.env.isDefinedAt("CI")) {
+  println("[Info] Li Haoyi's workbench disabled ", sys.env.getOrElse("CI", "?"))
+  Seq.empty
+} else {
+  refreshBrowsers <<= refreshBrowsers.triggeredBy(fastOptJS in Compile)
+  enablePlugins(WorkbenchPlugin)}
+
+if (sys.env.isDefinedAt("CI")) normalizedName := normalizedName.value // Dummy
+else // Update without refreshing the page every time fastOptJS completes
+  refreshBrowsers <<= refreshBrowsers.triggeredBy(fastOptJS in Compile)
