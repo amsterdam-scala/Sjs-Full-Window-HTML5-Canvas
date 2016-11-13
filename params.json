@@ -1,0 +1,6 @@
+{
+  "name": "Sjs-full-window-html5-canvas",
+  "tagline": "Template for Scala.js application using HTML canvas to fill the window, repainted on window resize.",
+  "body": "Scala Full Window HTML Canvas\r\n=============================\r\nTo create a resizeable full window HTML Canvas Scala.js application\r\n * Use the included index.html and .css files for the application web page\r\n * Edit index.html to give it the correct page title, paths to the JS dependencies and compiled Scala.js application, and main application class name\r\n * Implement the paint method in the main application class to perform the logic of painting the application initially and on each resize\r\n * Implement the rest of the application logic in the main method of the main application class\r\n\r\n\r\nmaster\r\n\r\n\r\n\r\n\r\n Incorporated Technology\r\n\r\n Lincences: EUPL V.1.1\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
