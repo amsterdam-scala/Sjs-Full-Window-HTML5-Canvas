@@ -65,7 +65,3 @@ if (sys.env.isDefinedAt("CI")) {
 } else {
   refreshBrowsers <<= refreshBrowsers.triggeredBy(fastOptJS in Compile)
   enablePlugins(WorkbenchPlugin)}
-
-if (sys.env.isDefinedAt("CI")) normalizedName := normalizedName.value // Dummy
-else // Update without refreshing the page every time fastOptJS completes
-  refreshBrowsers <<= refreshBrowsers.triggeredBy(fastOptJS in Compile)
