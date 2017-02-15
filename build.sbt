@@ -1,7 +1,7 @@
 lazy val commonSettings = Seq(
-                name := "FullWindowHtml5Canvas",
+                name := "Full Window Html5 Canvas",
              version := "0.0",
-         description := "Simple HTML5 Canvas game ported to Scala.js.",
+         description := "Template for Scala.js client only using HTML canvas to fill the window, repainted on window resize.",
         organization := "nl.amsscala",
     organizationName := "Amsterdam.scala Meetup Group",
 organizationHomepage := Some(url("http://www.meetup.com/amsterdam-scala/")),
@@ -13,18 +13,17 @@ organizationHomepage := Some(url("http://www.meetup.com/amsterdam-scala/")),
       normalizedName := "main"
 
 // ** Scala dependencies **
-scalaVersion in ThisBuild := "2.12.0"
+scalaVersion in ThisBuild := "2.12.1"
 scalacOptions in ThisBuild ++= Seq("-unchecked", "-deprecation")
 scalacOptions in (Compile,doc) ++=
   Seq("-doc-root-content", baseDirectory.value + "/src/main/scala-2.12/root-doc.md", "-groups", "-implicits")
 
-// resolvers += Resolver.sonatypeRepo("snapshots")
 libraryDependencies ++= Seq(
-         "be.doeraene" %%% "scalajs-jquery"     % "0.9.1",
-  "com.github.cquiroz" %%% "scala-java-locales" % "0.3.1-cldr30",
+//         "be.doeraene" %%% "scalajs-jquery"     % "0.9.1",
+  "com.github.cquiroz" %%% "scala-java-locales" % "0.4.0-cldr30",
 //"com.github.karasiq" %%% "scalajs-bootstrap"  % "1.1.2",
-         "com.lihaoyi" %%% "scalatags"          % "0.6.2",
-         "com.lihaoyi" %%% "upickle"            % "0.4.4",
+         "com.lihaoyi" %%% "scalatags"          % "0.6.3",
+//       "com.lihaoyi" %%% "upickle"            % "0.4.4",
        "io.github.soc" %%% "scala-java-time"    % "2.0.0-M5",
 //        "io.surfkit" %%% "scalajs-google-maps"% "0.1-SNAPSHOT",
         "org.scala-js" %%% "scalajs-dom"        % "0.9.1",
